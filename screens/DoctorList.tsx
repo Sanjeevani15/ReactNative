@@ -1,41 +1,40 @@
 import React from "react";
-import { StyleSheet, View, Text, Image, Button } from "react-native";
+import { StyleSheet, View, Text, Image, Button, Platform } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import SearchIcon from "react-native-vector-icons/AntDesign";
 import Rating from "../components/StarRating";
 import { ScrollView, TouchableHighlight } from "react-native-gesture-handler";
 
-const doctorDetails = [
-  {
-    id: "1",
-    name: "Robert Kilm",
-    years: 20,
-    type: "Neurologist",
-    languages: "English, Japenese",
-    rate: 230,
-    ratingCount: 3.0,
-    reviewCount: 25,
-    rating: 4,
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
-  },
-  {
-    id: "2",
-    name: "Norman Davis",
-    years: 8,
-    type: "Neurologist",
-    languages: "English, Spanish",
-    rate: 250,
-    ratingCount: 4.0,
-    reviewCount: 16,
-    rating: 3,
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=922&q=80",
-  },
-];
-
 export default function DoctorList({ navigation, route }: any) {
   const { item } = route.params;
+  const doctorDetails = [
+    {
+      id: "1",
+      name: "Robert Kilm",
+      years: 20,
+      type: item.title,
+      languages: "English, Japenese",
+      rate: 240,
+      ratingCount: 3.0,
+      reviewCount: 25,
+      rating: 4,
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    },
+    {
+      id: "2",
+      name: "Norman Davis",
+      years: 8,
+      type: item.title,
+      languages: "English, Spanish",
+      rate: 250,
+      ratingCount: 4.0,
+      reviewCount: 16,
+      rating: 3,
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=922&q=80",
+    },
+  ];
   return (
     <ScrollView style={{ backgroundColor: "#FEE2E74D", flex: 1 }}>
       <View>
@@ -145,7 +144,7 @@ export default function DoctorList({ navigation, route }: any) {
                   >
                     {doctor.years} years of experience
                   </Text>
-                  <Text style={styles.doctorTypeText}>{item.title}</Text>
+                  <Text style={styles.doctorTypeText}>{doctor.type}</Text>
                   <Text style={styles.doctorTypeText}>{doctor.languages}</Text>
                   <Text style={{ marginBottom: 5 }}>
                     <Text
@@ -189,10 +188,24 @@ export default function DoctorList({ navigation, route }: any) {
                 </View>
 
                 <TouchableHighlight
+                  underlayColor="#F54061"
+                  activeOpacity={0.9}
                   style={styles.bookButton}
-                  onPress={() => navigation.navigate("PhysicianProfile")}
+                  onPress={() =>
+                    navigation.navigate("PhysicianProfile", { doctor })
+                  }
                 >
-                  <Button title="Book Appointment" color="#F54061" />
+                  <Text
+                    style={{
+                      fontWeight: "700",
+                      fontSize: Platform.OS == "android" ? 14 : 12,
+                      color: "#fff",
+                      textAlign: "center",
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Book Appointment
+                  </Text>
                 </TouchableHighlight>
               </View>
             </View>
@@ -234,7 +247,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.6,
+    shadowOpacity: Platform.OS == "android" ? 0.6 : 0.3,
     shadowRadius: 2,
     borderRadius: 10,
     elevation: 20,
@@ -269,7 +282,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS == "android" ? 0.6 : 0.3,
     shadowRadius: 2,
     borderRadius: 10,
   },
@@ -289,8 +302,12 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#F54061",
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS == "android" ? 0.6 : 0.3,
     shadowRadius: 2,
     borderRadius: 10,
+    backgroundColor: "#F54061",
+    height: 44,
+    justifyContent: "center",
+    width: Platform.OS == "android" ? 160 : 130,
   },
 });

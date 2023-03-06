@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Checkbox from "expo-checkbox";
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   input: {
+    height: 50,
     borderColor: "#ccc",
     borderRadius: 6,
     padding: 8,
@@ -192,10 +194,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 5,
     },
-    shadowOpacity: 0.8,
+    shadowOpacity: Platform.OS == "android" ? 0.8 : 0.3,
     elevation: 5, // for android
   },
   terms: {
@@ -226,6 +228,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   passwordinput: {
+    height: 50,
     borderColor: "#ccc",
     borderRadius: 6,
     padding: 8,
@@ -234,16 +237,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 5,
     },
-    shadowOpacity: 0.8,
+    shadowOpacity: Platform.OS == "android" ? 0.8 : 0.3,
     elevation: 5, // for android
   },
   iconContainer: {
     position: "absolute",
     right: 10,
-    bottom: 28,
+    bottom: 31,
   },
   icon: {
     width: 12,
@@ -259,8 +262,8 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     borderRadius: 12,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 1,
+    shadowOffset: { width: 4, height: 8 },
+    shadowOpacity: Platform.OS == "android" ? 1 : 0.2,
     shadowRadius: 2,
   },
   tabsText: {

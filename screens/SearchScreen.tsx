@@ -6,6 +6,7 @@ import {
   TextInput,
   FlatList,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import SearchIcon from "react-native-vector-icons/AntDesign";
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.6,
+    shadowOpacity: Platform.OS == "android" ? 0.6 : 0.3,
     shadowRadius: 2,
     borderRadius: 10,
     elevation: 20,
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS == "android" ? 0.6 : 0.3,
     shadowRadius: 2,
     borderRadius: 10,
   },

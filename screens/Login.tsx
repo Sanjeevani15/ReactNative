@@ -6,85 +6,88 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Platform,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 export default function Login({ navigation }: any) {
   return (
     // <ScrollView style={{ flex: 1, justifyContent: "center" }}>
+
+    <View
+      style={{
+        backgroundColor: "#FEE2E74D",
+        flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: 44,
+      }}
+    >
       <View
         style={{
-          backgroundColor: "#FEE2E74D",
-          flex: 1,
-          justifyContent: "center",
-          paddingHorizontal: 44,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
         }}
       >
-        <View
+        <Image
+          source={require("../assets/geekcarelogo.png")}
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            height: 40,
+            width: 207,
+            justifyContent: "center",
+            marginBottom: 26,
           }}
-        >
-          <Image
-            source={require("../assets/geekcarelogo.png")}
-            style={{
-              height: 40,
-              width: 207,
-              justifyContent: "center",
-              marginBottom: 26,
-            }}
-          />
+        />
+        <View>
+          <Text style={styles.headerLine}>Embrace Being Human</Text>
+        </View>
+        <View>
+          <Text style={styles.heading}>Let&apos;s Get Started</Text>
+        </View>
+
+        <View style={{ marginVertical: 30, width: "100%" }}>
           <View>
-            <Text style={styles.headerLine}>Embrace Being Human</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Email or Mobile No."
+              // value={email}
+              // onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
           </View>
           <View>
-            <Text style={styles.heading}>Let&apos;s Get Started</Text>
-          </View>
-          <View style={{ marginVertical: 30, width: "100%" }}>
-            <View>
-              <TextInput
-                style={styles.input}
-                placeholder="Email or Mobile No."
-                // value={email}
-                // onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
-              />
-            </View>
-            <View>
-              <TextInput
-                style={styles.input}
-                placeholder="Password"
-                //   value={password}
-                //   onChangeText={setPassword}
-                secureTextEntry
-              />
-            </View>
-            <View>
-              <Text style={styles.forgotPass}>Forgot Password?</Text>
-            </View>
-            <View>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate("Dashboard")}
-              >
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Password"
+              //   value={password}
+              //   onChangeText={setPassword}
+              secureTextEntry
+            />
           </View>
           <View>
-            <Text
-              style={styles.routeToSignup}
-              onPress={() => navigation.navigate("SignUp")}
+            <Text style={styles.forgotPass}>Forgot Password?</Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate("Dashboard")}
             >
-              Don&apos;t have an account? SignUp
-            </Text>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
 
+        <View>
+          <Text
+            style={styles.routeToSignup}
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            Don&apos;t have an account? SignUp
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 }
 
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   heading: {
-    fontSize: 32,
+    fontSize: Platform.OS == "android" ? 32 : 30,
     fontWeight: "600",
     textAlign: "center",
     color: "#464043",
@@ -105,6 +108,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   input: {
+    height: 50,
     borderColor: "#ccc",
     borderRadius: 6,
     padding: 8,
@@ -113,10 +117,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
+      width: 2,
       height: 5,
     },
-    shadowOpacity: 0.8,
+    // shadowOpacity: 0.8,
+    shadowOpacity: Platform.OS == "android" ? 0.8 : 0.3,
     elevation: 5, // for android
   },
   forgotPass: {

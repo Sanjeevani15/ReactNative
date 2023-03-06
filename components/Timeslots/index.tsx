@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, ScrollView, Platform } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Timeslots() {
@@ -22,6 +22,8 @@ export default function Timeslots() {
         alignItems: "center",
         flexDirection: "row",
         height: 80,
+        borderTopWidth: 1,
+        borderTopColor: '#BFBFBF'
       }}
     >
       {timeSlots.map((timeslot: any) => (
@@ -29,8 +31,8 @@ export default function Timeslots() {
           style={{
             height: 40,
             width: 80,
-            borderWidth: 1,
             borderRadius: 8,
+            borderWidth: 1,
             borderColor:
               timeslot.status == "enabled"
                 ? selectedSlot === timeslot.startTime
@@ -46,12 +48,15 @@ export default function Timeslots() {
                 : "#EDEDED",
           }}
           key={timeslot.startTime}
-          onPress={() => timeslot.status == "enabled" && setSelectedSlot(timeslot.startTime)}
+          onPress={() =>
+            timeslot.status == "enabled" && setSelectedSlot(timeslot.startTime)
+          }
         >
           <Text
             style={{
               textAlign: "center",
               textAlignVertical: "center",
+              paddingTop: Platform.OS == "ios" ? 10 : 0,
               height: 40,
               color:
                 timeslot.status == "enabled"

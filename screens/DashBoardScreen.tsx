@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Image, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, Image, TouchableOpacity, View, Platform } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const dashboard = [
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS == "android" ? 1 : 0.3,
     shadowRadius: 2,
   },
   tabs: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
+    shadowOpacity: Platform.OS == "android" ? 1 : 0.3,
     shadowRadius: 2,
     zIndex: 20,
   },

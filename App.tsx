@@ -13,6 +13,9 @@ import DoctorList from "./screens/DoctorList";
 import Login from "./screens/Login";
 import SignUp from "./screens/SignUp";
 import PhysicianProfile from "./screens/PhysicianProfile";
+import AppointmentForDetails from "./screens/AppointmentForDetails";
+import CareAgenda from "./screens/CareAgenda";
+import AppointmentSummary from "./screens/AppointmentSummary";
 
 // import IonIcon from "react-native-vector-icons/Ionicons";
 
@@ -52,6 +55,21 @@ export default function App() {
           <Stack.Screen
             name="PhysicianProfile"
             component={PhysicianProfile}
+            options={{ headerShown: false }}
+          />
+           <Stack.Screen
+            name="AppointmentForDetails"
+            component={AppointmentForDetails}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CareAgenda"
+            component={CareAgenda}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AppointmentSummary"
+            component={AppointmentSummary}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

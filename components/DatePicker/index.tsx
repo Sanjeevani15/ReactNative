@@ -3,9 +3,23 @@ import { View, Text, Button } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Icon from "react-native-vector-icons/FontAwesome";
-import moment from 'moment';
+import moment from "moment";
 
-export default function DatePickerCom() {
+export default function DatePickerCom({
+  placeholder,
+  textStyle,
+  iconStyle,
+  containerStyle,
+  minimumDate,
+  maximumDate
+}: {
+  placeholder: string;
+  textStyle: any;
+  iconStyle: any;
+  containerStyle: any;
+  minimumDate?: any;
+  maximumDate?: any;
+}) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -18,21 +32,22 @@ export default function DatePickerCom() {
   };
 
   const handleConfirm = (date: any) => {
-    setSelectedDate( moment(date).format('LL'));
+    setSelectedDate(moment(date).format("LL"));
     hideDatePicker();
   };
   return (
     <View>
       <View>
         <TouchableHighlight
-          style={{
-            height: 50,
-            borderWidth: 1,
-            borderColor: "#BFBFBF",
-            borderRadius: 8,
-            paddingHorizontal: 14,
-            justifyContent: "center",
-          }}
+          // style={{
+          //   height: 50,
+          //   borderWidth: 1,
+          //   borderColor: "#BFBFBF",
+          //   borderRadius: 8,
+          //   paddingHorizontal: 14,
+          //   justifyContent: "center",
+          // }}
+          style={containerStyle}
           underlayColor="#fff"
           onPress={showDatePicker}
         >
@@ -43,16 +58,9 @@ export default function DatePickerCom() {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontSize: 14, fontWeight: "600" }}>
-              {selectedDate || "Select a Date"}
-            </Text>
+            <Text style={textStyle}>{selectedDate || placeholder}</Text>
 
-            <Icon
-              name="calendar-o"
-              size={20}
-              //   color="#000"
-              style={{ color: "#2B3688" }}
-            />
+            <Icon name="calendar-o" size={20} style={iconStyle} />
           </View>
         </TouchableHighlight>
 
@@ -61,7 +69,8 @@ export default function DatePickerCom() {
           mode="date"
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
-          minimumDate={new Date()}
+          minimumDate={minimumDate}
+          maximumDate={maximumDate}
         />
       </View>
     </View>
